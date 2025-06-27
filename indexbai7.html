@@ -6,6 +6,119 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>English Practice Test – Bài 7</title>
     <style>
+      #page-loader {
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle at center, #000 20%, #0a0a1a 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+        color: white;
+        font-family: sans-serif;
+        font-size: 18px;
+        overflow: hidden;
+        transition: opacity 0.5s ease;
+      }
+
+      .solar-system {
+        position: relative;
+        width: 200px;
+        height: 200px;
+      }
+
+      .sun {
+        width: 30px;
+        height: 30px;
+        background: radial-gradient(circle, #ffdd00, #ff8800);
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 20px #ff8800;
+      }
+
+      .orbit {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border: 1px dashed rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .orbit1 {
+        width: 80px;
+        height: 80px;
+        animation: spin 4s linear infinite;
+      }
+      .orbit2 {
+        width: 120px;
+        height: 120px;
+        animation: spin 7s linear infinite;
+      }
+      .orbit3 {
+        width: 160px;
+        height: 160px;
+        animation: spin 10s linear infinite;
+      }
+
+      .planet {
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        transform: translateY(-50%);
+        border-radius: 50%;
+      }
+
+      .planet1 {
+        width: 10px;
+        height: 10px;
+        background: #00f2fe;
+        box-shadow: 0 0 8px #00f2fe;
+      }
+
+      .planet2 {
+        width: 12px;
+        height: 12px;
+        background: #4facfe;
+        box-shadow: 0 0 8px #4facfe;
+      }
+
+      .planet3 {
+        width: 14px;
+        height: 14px;
+        background: #ff3cac;
+        box-shadow: 0 0 8px #ff3cac;
+      }
+
+      @keyframes spin {
+        from {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        to {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+
+      .loader-text {
+        margin-top: 20px;
+        font-size: 16px;
+        color: #ccc;
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
       @keyframes shake {
         0% {
           transform: translate(1px, 1px) rotate(0deg);
@@ -360,9 +473,74 @@
         font-size: 1rem;
         font-family: "Segoe UI", sans-serif;
       }
+      @keyframes wiggleFloat {
+        0%,
+        100% {
+          transform: translateX(0);
+          opacity: 0.6;
+        }
+        25% {
+          transform: translateX(-3px);
+        }
+        50% {
+          transform: translateX(3px);
+          opacity: 1;
+        }
+        75% {
+          transform: translateX(-2px);
+        }
+      }
+
+      #global-skip-btn {
+        animation: wiggleFloat 2s ease-in-out infinite;
+      }
+
+      #global-skip-btn:hover {
+        opacity: 1;
+      }
+      .toast {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #333;
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        font-size: 14px;
+        z-index: 9999;
+      }
+
+      .toast.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
     </style>
   </head>
   <body>
+    <div id="notify-toast" class="toast">Thông báo</div>
+
+    <div id="page-loader">
+      <div class="solar-system">
+        <div class="sun"></div>
+        <div class="orbit orbit1"><div class="planet planet1"></div></div>
+        <div class="orbit orbit2"><div class="planet planet2"></div></div>
+        <div class="orbit orbit3"><div class="planet planet3"></div></div>
+      </div>
+      <p class="loader-text">Đang khởi động vũ trụ...</p>
+    </div>
+    <!-- Nút skip sau khi load xong -->
+    <button
+      id="global-skip-btn"
+      onclick="skipLoaderFor2Hours()"
+      style="display: none"
+    >
+      ⏭ Bỏ qua loading trong 2h
+    </button>
+
     <div id="mobile-blocker">
       <div class="mobile-message">
         ⚠ Trang này không hỗ trợ trên điện thoại.<br />
@@ -3200,6 +3378,151 @@
           (document[_0x4584bd(0x1e8)][_0x4584bd(0x1e2)]["pointerEvents"] =
             _0x4584bd(0x1ea)),
           (blocker[_0x4584bd(0x1e2)][_0x4584bd(0x1df)] = _0x4584bd(0x1e9));
+      }
+    </script>
+    <script>
+      const _0x258eab = _0x3155;
+      (function (_0x4e7ae3, _0x42152e) {
+        const _0x2312e1 = _0x3155,
+          _0x1cd73b = _0x4e7ae3();
+        while (!![]) {
+          try {
+            const _0x4a22c1 =
+              -parseInt(_0x2312e1(0x93)) / 0x1 +
+              (-parseInt(_0x2312e1(0x99)) / 0x2) *
+                (parseInt(_0x2312e1(0x9e)) / 0x3) +
+              -parseInt(_0x2312e1(0xa4)) / 0x4 +
+              (-parseInt(_0x2312e1(0x86)) / 0x5) *
+                (-parseInt(_0x2312e1(0x91)) / 0x6) +
+              parseInt(_0x2312e1(0x87)) / 0x7 +
+              (-parseInt(_0x2312e1(0xa0)) / 0x8) *
+                (-parseInt(_0x2312e1(0xa3)) / 0x9) +
+              -parseInt(_0x2312e1(0x90)) / 0xa;
+            if (_0x4a22c1 === _0x42152e) break;
+            else _0x1cd73b["push"](_0x1cd73b["shift"]());
+          } catch (_0x34df85) {
+            _0x1cd73b["push"](_0x1cd73b["shift"]());
+          }
+        }
+      })(_0x1b16, 0xa85c3);
+      function skipLoader() {
+        const _0x252227 = _0x3155,
+          _0x2d5b49 = document[_0x252227(0x98)]("page-loader");
+        (_0x2d5b49["style"]["opacity"] = "0"),
+          setTimeout(
+            () => (_0x2d5b49[_0x252227(0x96)]["display"] = _0x252227(0x92)),
+            0x1f4
+          );
+      }
+      function skipLoaderFor2Hours() {
+        const _0x245bb4 = _0x3155,
+          _0x227ace = Date[_0x245bb4(0x9d)](),
+          _0x3a0f4d = localStorage["getItem"]("skipLoaderUntil");
+        if (_0x3a0f4d && _0x227ace < parseInt(_0x3a0f4d)) {
+          showToast(
+            _0x245bb4(0x8e) +
+              new Date(parseInt(_0x3a0f4d))["toLocaleTimeString"]()
+          );
+          return;
+        }
+        localStorage[_0x245bb4(0x94)](
+          _0x245bb4(0xa2),
+          _0x227ace + 0x2 * 0x3c * 0x3c * 0x3e8
+        ),
+          skipLoader();
+      }
+      window[_0x258eab(0x88)](_0x258eab(0x8d), () => {
+        const _0x56b42a = _0x258eab,
+          _0x2309eb = localStorage[_0x56b42a(0x9a)]("skipLoaderUntil"),
+          _0x1b26a3 = Date["now"]();
+        _0x2309eb &&
+          _0x1b26a3 < parseInt(_0x2309eb) &&
+          ((document[_0x56b42a(0x98)](_0x56b42a(0x97))[_0x56b42a(0x96)][
+            _0x56b42a(0x8c)
+          ] = "none"),
+          (document[_0x56b42a(0x98)]("global-skip-btn")[_0x56b42a(0x96)][
+            _0x56b42a(0x8c)
+          ] = _0x56b42a(0x8f)));
+      }),
+        window[_0x258eab(0x88)]("load", () => {
+          const _0x4b2315 = _0x258eab,
+            _0x337c2b = localStorage[_0x4b2315(0x9a)](_0x4b2315(0xa2)),
+            _0xc56536 = Date[_0x4b2315(0x9d)]();
+          if (!_0x337c2b || _0xc56536 >= parseInt(_0x337c2b)) {
+            const _0xdbe445 = document[_0x4b2315(0x98)](_0x4b2315(0x97));
+            setTimeout(() => {
+              const _0x2489b4 = _0x4b2315;
+              (_0xdbe445[_0x2489b4(0x96)][_0x2489b4(0x8b)] = "0"),
+                setTimeout(() => {
+                  const _0x3f0b7a = _0x2489b4;
+                  (_0xdbe445[_0x3f0b7a(0x96)][_0x3f0b7a(0x8c)] =
+                    _0x3f0b7a(0x92)),
+                    (document[_0x3f0b7a(0x98)](_0x3f0b7a(0x9c))[
+                      _0x3f0b7a(0x96)
+                    ][_0x3f0b7a(0x8c)] = _0x3f0b7a(0x8f));
+                }, 0x1f4);
+            }, 0x7d0);
+          }
+        });
+      function showToast(_0x1f845a, _0x2c1b27 = 0xbb8) {
+        const _0x3436f5 = _0x258eab,
+          _0x2bc5b0 = document[_0x3436f5(0x98)](_0x3436f5(0x8a));
+        (_0x2bc5b0[_0x3436f5(0xa1)] = _0x1f845a),
+          _0x2bc5b0[_0x3436f5(0x9f)][_0x3436f5(0x95)]("show"),
+          setTimeout(() => {
+            const _0x50d956 = _0x3436f5;
+            _0x2bc5b0[_0x50d956(0x9f)][_0x50d956(0x89)](_0x50d956(0x9b));
+          }, _0x2c1b27);
+      }
+      function _0x3155(_0x57712b, _0x396f6a) {
+        const _0x1b166a = _0x1b16();
+        return (
+          (_0x3155 = function (_0x31551c, _0x356faf) {
+            _0x31551c = _0x31551c - 0x86;
+            let _0x2f1e98 = _0x1b166a[_0x31551c];
+            return _0x2f1e98;
+          }),
+          _0x3155(_0x57712b, _0x396f6a)
+        );
+      }
+      function _0x1b16() {
+        const _0x541923 = [
+          "textContent",
+          "skipLoaderUntil",
+          "9pbsvoy",
+          "1413060vogISI",
+          "1360805bSyqLv",
+          "9234771tpcZex",
+          "addEventListener",
+          "remove",
+          "notify-toast",
+          "opacity",
+          "display",
+          "DOMContentLoaded",
+          "⏱\x20Loader\x20đã\x20được\x20tắt\x20sẵn\x20tới\x20",
+          "block",
+          "13234610zuqSPr",
+          "30druTsK",
+          "none",
+          "937341hivhCQ",
+          "setItem",
+          "add",
+          "style",
+          "page-loader",
+          "getElementById",
+          "10sABwsF",
+          "getItem",
+          "show",
+          "global-skip-btn",
+          "now",
+          "33918iGsrke",
+          "classList",
+          "5441136VCYklY",
+        ];
+        _0x1b16 = function () {
+          return _0x541923;
+        };
+        return _0x1b16();
       }
     </script>
   </body>
